@@ -63,8 +63,21 @@ struct CustomDatePicker: View {
             
             LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(extractDate()) { value in
-                    Text("\(value.day)")
-                        .font(.title3)
+//                    Text("\(value.day)")
+//                        .font(.title3)
+                    
+                    CardView(value: value)
+                        .background(
+                            
+                            Capsule()
+                                .fill(Color(red: 0, green: 122/255, blue: 255/255, opacity: 0.47))
+                                .padding(.horizontal, 8)
+                                .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1: 0)
+                                
+                        )
+                        .onTapGesture {
+                            currentDate = value.date
+                        }
                 }
             }
         }
@@ -73,10 +86,56 @@ struct CustomDatePicker: View {
             currentDate = getCurrentMonth()
         }
     }
+    
+    @ViewBuilder
+    func CardView(value: DateValue) -> some View {
+        VStack {
+            if value.day != -1 {
+                if let match = matches.first(where: { match in
+                    
+                    return isSameDay(date1: match.matchDate, date2: value.date)
+                }){
+                    Text("\(value.day)")
+                        .font(.title3)
+                        .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? .white : .primary)
+                        .frame(maxWidth:.infinity)
+                    Spacer()
+                    if match.matchOutcome == matchRecordType.win {
+                        Circle()
+                            .fill(.blue)
+                            .frame(width: 8, height: 8)
+                            
+                    } else {
+                       Circle()
+                            .fill(.gray)
+                            .frame(width: 8,height: 8)
+                    }
+                    
+                    
+                } else {
+                    Text("\(value.day)")
+                        .font(.title3)
+                        .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? .white : .primary)
+                        .frame(maxWidth:.infinity)
+                    
+                    Spacer()
+                }
+            }
+        }
+        .padding(.vertical, 8)
+        .frame(height: 60, alignment: .top)
+    }
+    
+    func isSameDay(date1: Date, date2: Date) -> Bool {
+        let calendar = Calendar.current
+        
+        return calendar.isDate(date1, inSameDayAs: date2)
+    }
+    
     // 달 년 갱신
     func extraData() -> [String] {
         let formatter = DateFormatter()
-        formatter.dateFormat = "YYYY MMMM"
+        formatter.dateFormat = "YYYY MM"
         
         let date = formatter.string(from: currentDate)
         
@@ -99,11 +158,19 @@ struct CustomDatePicker: View {
         // 현재 달, 일 받아오기
         let currentMonth = getCurrentMonth()
         
-        return currentMonth.getAllDates().compactMap { date -> DateValue in
+        var days = currentMonth.getAllDates().compactMap { date -> DateValue in
             let day = calendar.component(.day, from: date)
             
             return DateValue(day: day, date: date)
         }
+        
+        let firstWeekday = calendar.component(.weekday, from: days.first?.date ?? Date())
+        
+        for _ in 0..<firstWeekday - 1 {
+            days.insert(DateValue(day: -1, date: Date()), at: 0)
+        }
+        
+        return days
         
     }
 }
@@ -120,12 +187,11 @@ extension Date {
         
         let startDate = calendar.date(from: Calendar.current.dateComponents([.year, .month], from: self))!
         
-        var range = calendar.range(of: .day, in: .month, for: startDate)!
-        range.removeLast()
+        let range = calendar.range(of: .day, in: .month, for: startDate)!
         
         return range.compactMap { day -> Date in
             
-            return calendar.date(byAdding: .day, value: day == 1 ? 0 : day, to: startDate)!
+            return calendar.date(byAdding: .day, value: day - 1, to: startDate)!
             
         }
     }

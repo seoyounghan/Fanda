@@ -6,9 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SelectTeam: View {
     @State private var selectedID: UUID = UUID()
+    @State private var selectedTeam: Team?
+    @State private var userDatas: UserData?
+    @Environment(\.modelContext) var modelContext
+    
+    @Query private var qur: [UserData]
     
     var body: some View {
         VStack {
@@ -19,7 +25,11 @@ struct SelectTeam: View {
                 .padding(.top, 30)
             
             ForEach(teams, id: \.id) { team in
-                Button(action: {selectedID = team.id}, label: {
+                Button(action: {
+                    selectedID = team.id
+                    selectedTeam = team
+                }, label: {
+                    
                     VStack(alignment: .leading) {
                         HStack {
                             Text("\(team.name)")
@@ -33,6 +43,8 @@ struct SelectTeam: View {
                                 Image(systemName: "heart.fill")
                                     .foregroundColor(.red)
                                     .padding(.trailing, 30)
+                                
+                                
                             } else {
                                 Image(systemName: "heart")
                                     .colorMultiply(.black)
@@ -47,13 +59,19 @@ struct SelectTeam: View {
                 })
             }
             Spacer(minLength: 30)
-            Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-                Text("Start")
-                    .frame(width: 300, height: 30)
-            })
-            .buttonStyle(.borderedProminent)
-            .tint(.blue)
-            .padding(.bottom, 40)
+            if let selectedTeam {
+                Button(action: {
+                    modelContext.insert(UserData(isTeamSelected: true, favoriteTeam: selectedTeam))
+                    let _ = print(qur[0].favoriteTeam.name)
+                }, label: {
+                    Text("Start")
+                        .frame(width: 300, height: 30)
+                    
+                })
+                .buttonStyle(.borderedProminent)
+                .tint(.blue)
+                .padding(.bottom, 40)
+            }
             
             
         }

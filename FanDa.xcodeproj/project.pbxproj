@@ -15,6 +15,8 @@
 		BD1AEB4B2BCAB9780069A75F /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1AEB4A2BCAB9780069A75F /* CalendarView.swift */; };
 		BD1AEB4D2BCAC0B70069A75F /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1AEB4C2BCAC0B70069A75F /* CustomDatePicker.swift */; };
 		BD1AEB4F2BCACB250069A75F /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1AEB4E2BCACB250069A75F /* DateValue.swift */; };
+		BD1AEB512BCBA0170069A75F /* UserMatchRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1AEB502BCBA0170069A75F /* UserMatchRecord.swift */; };
+		BD1AEB532BCBA5760069A75F /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1AEB522BCBA5760069A75F /* UserData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +29,8 @@
 		BD1AEB4A2BCAB9780069A75F /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		BD1AEB4C2BCAC0B70069A75F /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		BD1AEB4E2BCACB250069A75F /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
+		BD1AEB502BCBA0170069A75F /* UserMatchRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMatchRecord.swift; sourceTree = "<group>"; };
+		BD1AEB522BCBA5760069A75F /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +95,8 @@
 			children = (
 				BD1AEB452BCA4B4C0069A75F /* Teams.swift */,
 				BD1AEB4E2BCACB250069A75F /* DateValue.swift */,
+				BD1AEB502BCBA0170069A75F /* UserMatchRecord.swift */,
+				BD1AEB522BCBA5760069A75F /* UserData.swift */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -165,7 +171,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD1AEB512BCBA0170069A75F /* UserMatchRecord.swift in Sources */,
 				BD1AEB4D2BCAC0B70069A75F /* CustomDatePicker.swift in Sources */,
+				BD1AEB532BCBA5760069A75F /* UserData.swift in Sources */,
 				BD1AEB462BCA4B4C0069A75F /* Teams.swift in Sources */,
 				BD1AEB382BCA421A0069A75F /* SelectTeam.swift in Sources */,
 				BD1AEB4F2BCACB250069A75F /* DateValue.swift in Sources */,
