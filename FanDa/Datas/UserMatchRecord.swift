@@ -35,14 +35,12 @@ func getSampleDate(offset: Int) -> Date {
 //Samples
 
 var matches: [UserMatchRecord] = [
-    UserMatchRecord(matchOutcome: matchRecordType.win, matchOpponent: teams[2], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용", matchDate: getSampleDate(offset: 3)),
-    UserMatchRecord(matchOutcome: matchRecordType.lose, matchOpponent: teams[2], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용", matchDate: getSampleDate(offset: -1)),
-    UserMatchRecord(matchOutcome: matchRecordType.win, matchOpponent: teams[2], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용", matchDate: getSampleDate(offset: 5)),
-    UserMatchRecord(matchOutcome: matchRecordType.win, matchOpponent: teams[2], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용", matchDate: getSampleDate(offset: 8)),
-    UserMatchRecord(matchOutcome: matchRecordType.win, matchOpponent: teams[2], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용", matchDate: Date()),
-    UserMatchRecord(matchOutcome: matchRecordType.lose, matchOpponent: teams[2], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용", matchDate: getSampleDate(offset: -6)),
-
-
-
-
+    UserMatchRecord(matchOutcome: matchRecordType.win, matchOpponent: teams[2], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용1", matchDate: getSampleDate(offset: 3)),
+    UserMatchRecord(matchOutcome: matchRecordType.lose, matchOpponent: teams[5], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용2", matchDate: getSampleDate(offset: -1)),
+    UserMatchRecord(matchOutcome: matchRecordType.win, matchOpponent: teams[8], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용3", matchDate: getSampleDate(offset: 5)),
+    UserMatchRecord(matchOutcome: matchRecordType.win, matchOpponent: teams[0], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용4", matchDate: getSampleDate(offset: 8)),
+    UserMatchRecord(matchOutcome: matchRecordType.win, matchOpponent: teams[1], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용5", matchDate: Date()),
+    UserMatchRecord(matchOutcome: matchRecordType.lose, matchOpponent: teams[2], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용6", matchDate: getSampleDate(offset: -6)),
+    UserMatchRecord(matchOutcome: matchRecordType.lose, matchOpponent: teams[0], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용7", matchDate: getSampleDate(offset: -9)),
+    UserMatchRecord(matchOutcome: matchRecordType.lose, matchOpponent: teams[0], pog: "Viper", matchSet: "3:0", todayEmoji: "🥇", detail: "내용내용8리스트 뷰의 내용은 세줄까지만 표현됩니다.오예.내용내요애용", matchDate: getSampleDate(offset: 10)),
 ]
