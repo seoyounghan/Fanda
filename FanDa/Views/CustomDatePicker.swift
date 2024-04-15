@@ -14,6 +14,7 @@ struct CustomDatePicker: View {
     @State private var tag: Bool = false
     @State private var winLoseClicked: Int = 0
     @Environment(\.modelContext) var modelContext
+    @State private var showModal: Bool = false
     
     @Query private var qur: [UserData]
     
@@ -23,9 +24,9 @@ struct CustomDatePicker: View {
         VStack {
             
             VStack(alignment: .center) {
-                Image("\(qur[0].favoriteTeam.imageName)")
+                //Image("\(qur[0].favoriteTeam.imageName)")
                 // 프리뷰용 사진
-                //Image("image3")
+                Image("image3")
                     .resizable()
                     .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fit/*@END_MENU_TOKEN@*/)
                     .frame(width: 70)
@@ -69,7 +70,9 @@ struct CustomDatePicker: View {
                     .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                     
                 }
-                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                Button(action: {
+                    self.showModal = true
+                }, label: {
                     Text("오늘의 경기 기록하기")
                         .frame(width: 280, height: 44)
                 })
@@ -77,6 +80,9 @@ struct CustomDatePicker: View {
                 .background(Color(red: 0, green: 122/255, blue: 255/255, opacity: 0.47))
                 .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
                 .padding()
+                .sheet(isPresented: self.$showModal, content: {
+                    InputModalView()
+                })
             }
             .cornerRadius(10)
                     .overlay(

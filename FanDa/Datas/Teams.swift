@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Team: Identifiable, Codable {
+struct Team: Identifiable, Codable, Hashable {
     var id = UUID()
     let name: String
     let imageName: String

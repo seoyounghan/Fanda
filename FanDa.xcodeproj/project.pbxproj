@@ -29,6 +29,7 @@
 		BD583B0B2BCCBECB005B4EFB /* image1.png in Resources */ = {isa = PBXBuildFile; fileRef = BD583B012BCCBECB005B4EFB /* image1.png */; };
 		BD583B0C2BCCBECB005B4EFB /* image7.png in Resources */ = {isa = PBXBuildFile; fileRef = BD583B022BCCBECB005B4EFB /* image7.png */; };
 		BD583B0D2BCCBECB005B4EFB /* image9.png in Resources */ = {isa = PBXBuildFile; fileRef = BD583B032BCCBECB005B4EFB /* image9.png */; };
+		BD74DBEC2BCD7F0300704806 /* InputModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD74DBEB2BCD7F0300704806 /* InputModalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		BD583B012BCCBECB005B4EFB /* image1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image1.png; path = ../../../images/image1.png; sourceTree = "<group>"; };
 		BD583B022BCCBECB005B4EFB /* image7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image7.png; path = ../../../images/image7.png; sourceTree = "<group>"; };
 		BD583B032BCCBECB005B4EFB /* image9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image9.png; path = ../../../images/image9.png; sourceTree = "<group>"; };
+		BD74DBEB2BCD7F0300704806 /* InputModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModalView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				BD1AEB4C2BCAC0B70069A75F /* CustomDatePicker.swift */,
 				BD1AEB542BCC1A9C0069A75F /* TopBarView.swift */,
 				BD583AF72BCCB5E5005B4EFB /* DiaryListView.swift */,
+				BD74DBEB2BCD7F0300704806 /* InputModalView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				BD583AF82BCCB5E5005B4EFB /* DiaryListView.swift in Sources */,
 				BD1AEB552BCC1A9C0069A75F /* TopBarView.swift in Sources */,
 				BD1AEB4F2BCACB250069A75F /* DateValue.swift in Sources */,
+				BD74DBEC2BCD7F0300704806 /* InputModalView.swift in Sources */,
 				BD1AEB362BCA421A0069A75F /* FanDaApp.swift in Sources */,
 				BD1AEB4B2BCAB9780069A75F /* CalendarView.swift in Sources */,
 			);
