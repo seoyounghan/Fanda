@@ -6,15 +6,86 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CustomDatePicker: View {
     @Binding var currentDate: Date
     @State var currentMonth: Int = 0
+    @State private var tag: Bool = false
+    @State private var winLoseClicked: Int = 0
+    @Environment(\.modelContext) var modelContext
+    
+    @Query private var qur: [UserData]
+    
+    let days: [String] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    
     var body: some View {
-        VStack{
-            let days: [String] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+        VStack {
             
-            HStack(spacing: 20){
+            VStack(alignment: .center) {
+                Image("\(qur[0].favoriteTeam.imageName)")
+                // 프리뷰용 사진
+                //Image("image3")
+                    .resizable()
+                    .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fit/*@END_MENU_TOKEN@*/)
+                    .frame(width: 70)
+                    .padding(.all, 10)
+                
+                Divider()
+                    .background(.gray)
+                
+                Text("오늘의 승패")
+                    .fontWeight(.bold)
+                    .font(.subheadline)
+                HStack {
+                    Button(action: {
+                        winLoseClicked = 1
+                    }, label: {
+                        Text("승")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.center)
+                            .frame(width: 30, height: 30)
+                            .padding(.all, 10)
+                            
+                            
+                    })
+                    .foregroundColor(.white)
+                    .background(clikedColor(num1: winLoseClicked, num2: 1))
+                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    Button(action: {
+                        winLoseClicked = 2
+                    }, label: {
+                        Text("패")
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.center)
+                            .frame(width: 30, height: 30)
+                            .padding(.all, 10)
+                            
+                    })
+                    .foregroundColor(.white)
+                    .background(clikedColor(num1: winLoseClicked, num2: 2))
+                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                    
+                }
+                Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
+                    Text("오늘의 경기 기록하기")
+                        .frame(width: 280, height: 44)
+                })
+                .foregroundColor(.black)
+                .background(Color(red: 0, green: 122/255, blue: 255/255, opacity: 0.47))
+                .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
+                .padding()
+            }
+            .cornerRadius(10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 15)
+                            .stroke(Color.gray)
+                    )
+                    .padding([.top, .horizontal])
+            
+            HStack(spacing: 20) {
                 
                 VStack(alignment: .leading, spacing: 10) {
                     Text("\(extraData()[0])")
@@ -173,6 +244,14 @@ struct CustomDatePicker: View {
         return days
         
     }
+    
+    func clikedColor(num1: Int, num2: Int) -> Color {
+        if num1 == num2 {
+            return Color.blue
+        } else {
+            return Color.gray
+        }
+    }
 }
 
 struct CustomDatePicker_Preview: PreviewProvider {
@@ -195,4 +274,8 @@ extension Date {
             
         }
     }
+}
+
+#Preview {
+    CalendarView()
 }
