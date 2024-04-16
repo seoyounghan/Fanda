@@ -6,22 +6,35 @@
 //
 
 import Foundation
+import SwiftData
 
-enum matchRecordType {
+enum matchRecordType: Codable {
     case win
     case lose
     case none
 }
 
-struct UserMatchRecord: Identifiable {
-    var id = UUID().uuidString
+@Model class UserMatchRecord: Identifiable {
+    var id = UUID()
     var matchOutcome: matchRecordType
-    var matchOpponent: Team?
-    var pog: String?
-    var matchSet: String?
-    var todayEmoji: String?
-    var detail: String?
+    var matchOpponent: Team
+    var pog: String
+    var matchSet: String
+    var todayEmoji: String
+    var detail: String
     var matchDate: Date
+    
+    
+    init(id: UUID = UUID(), matchOutcome: matchRecordType, matchOpponent: Team, pog: String, matchSet: String, todayEmoji: String, detail: String, matchDate: Date) {
+        self.id = id
+        self.matchOutcome = matchOutcome
+        self.matchOpponent = matchOpponent
+        self.pog = pog
+        self.matchSet = matchSet
+        self.todayEmoji = todayEmoji
+        self.detail = detail
+        self.matchDate = matchDate
+    }
 }
 
 func getSampleDate(offset: Int) -> Date {
@@ -31,6 +44,8 @@ func getSampleDate(offset: Int) -> Date {
     
     return date ?? Date()
 }
+
+
 
 //Samples
 

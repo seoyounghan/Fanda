@@ -14,7 +14,7 @@ struct CustomDatePicker: View {
     @State private var tag: Bool = false
     @State private var winLoseClicked: Int = 0
     @Environment(\.modelContext) var modelContext
-    @State private var showModal: Bool = false
+    @State var showModal: Bool = false
     
     @Query private var qur: [UserData]
     
@@ -81,7 +81,7 @@ struct CustomDatePicker: View {
                 .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
                 .padding()
                 .sheet(isPresented: self.$showModal, content: {
-                    InputModalView()
+                    InputModalView(winLoseClicked: $winLoseClicked, showModal: $showModal)
                 })
             }
             .cornerRadius(10)
@@ -160,6 +160,8 @@ struct CustomDatePicker: View {
             }
             Spacer()
         }
+        .padding(.leading, 20)
+        .padding(.trailing, 20)
         .onChange(of: currentMonth) { newValue in
             //달 갱신
             currentDate = getCurrentMonth()

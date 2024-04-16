@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct InputModalView: View {
     let teamNameData = ["Gen.G", "T1"]
@@ -18,10 +19,16 @@ struct InputModalView: View {
     @State var pogWritten: String = "선수 선택"
     @State var setWritten = ""
     @State var emojiWritten: String = ""
+    @Binding var winLoseClicked: Int
+    
+    @Binding var showModal: Bool
+    
+    @Environment(\.modelContext) private var modelContext
+    //@Query private var 
     
     var body: some View {
         VStack {
-            HStack {
+            HStack(alignment: .center) {
                 Text("VS")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -38,6 +45,8 @@ struct InputModalView: View {
                         .foregroundColor(.black)
                 }.id(matchTeam)
                 
+            
+                        
             }
             TextField("내용을 입력하세요.", text: $detailWritten)
                 .padding(.all, 10)
@@ -118,13 +127,64 @@ struct InputModalView: View {
                             .padding([ .horizontal])
             }.id(emojis)
             
+            Button(action: {
+                do {
+                    modelContext.insert(UserMatchRecord(matchOutcome: intToMatchRecordType(myInt: winLoseClicked), matchOpponent: findTeam(teamName: matchTeam), pog: pogWritten, matchSet: setWritten, todayEmoji: emojiWritten, detail: detailWritten, matchDate: Date()))
+                    try modelContext.save()
+                } catch {
+                    print("error")
+                }
+                showModal = false
+            }, label: {
+                Text("저장")
+                    .foregroundColor(Color.white)
+                    .frame(height: 30)
+                    .fontWeight(.bold)
+            })
+            .frame(width: 350, height: 65)
+            .multilineTextAlignment(.center)
+            .font(.title)
+            .foregroundColor(.white)
+            .background(Color.black)
+            .cornerRadius(10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color(red: 217/255, green: 217/255, blue: 217/255, opacity: 1.0))
+                    )
+                    .padding([.top, .bottom], 30)
+
+            
             
         }
         
+        
+    }
+    
+    func intToMatchRecordType(myInt: Int) -> matchRecordType {
+        if myInt == 0 {
+            return matchRecordType.none
+        } else if myInt == 1 {
+            return matchRecordType.win
+        } else {
+            return matchRecordType.lose
+        }
+    }
+    
+    func findTeam(teamName: String) -> Team {
+        var tag = false
+        for team in teams {
+            if team.name == teamName {
+                tag = true
+                return team
+            }
+        }
+        if tag == false {
+            return teams[0]
+        }
     }
 }
 
 
-#Preview {
-    InputModalView()
-}
+//#Preview {
+//    InputModalView()
+//}

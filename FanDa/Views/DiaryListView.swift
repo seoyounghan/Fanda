@@ -6,55 +6,70 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct DiaryListView: View {
+    @State var modal: Bool = false
+    @State var clikedUUID: UUID = UUID()
+    
+    @Query private var matchRecords: [UserMatchRecord]
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
-                ForEach(matches) { match in
-                    if let matchOppo = match.matchOpponent {
+                ForEach(matchRecords) { match in
+                    
+                    Button(action: {
+                        clikedUUID = match.id
+                        modal.toggle()
+                    }, label: {
+                        
                         HStack {
-                            Image("\(matchOppo.imageName)")
+                            Image("\(match.matchOpponent.imageName)")
                                 .resizable()
                                 .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fit/*@END_MENU_TOKEN@*/)
                                 .frame(width: 90)
                                 .padding(.leading, 10)
-                                
+                            
                             
                             Spacer()
                                 .frame(width: 30)
                             
                             VStack(alignment: .leading) {
-                                Text("\(match.detail!)")
+                                Text("\(match.detail)")
                                     .fontWeight(.bold)
                                     .frame(width: 170, height: 80, alignment: .leading)
                                     .lineLimit(3)
                                     .allowsTightening(true)
+                                    .foregroundColor(.black)
                                 
-                                Text("\(extraData(detailDate: match.matchDate)[0]).\(extraData(detailDate: match.matchDate)[1]).\(extraData(detailDate: match.matchDate)[2]) \(match.todayEmoji!)")
+                                Text("\(extraData(detailDate: match.matchDate)[0]).\(extraData(detailDate: match.matchDate)[1]).\(extraData(detailDate: match.matchDate)[2]) \(match.todayEmoji)")
                                     .fontWeight(.thin)
                                     .font(.footnote)
+                                    .foregroundColor(.black)
                             }
                             
                         }
-                        .frame(width: 300, height: 100)
-                        .padding(.all, 20)
-                        
-                        .background(backgroundColor(matchOutcome: match.matchOutcome))
-                        .cornerRadius(10)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(backgroundColor(matchOutcome: match.matchOutcome))
-                                )
-                                .padding([.top, .horizontal])
-                        
-                    }
+                    })
+                    .frame(width: 300, height: 100)
+                    .padding(.all, 20)
+                    
+                    .background(backgroundColor(matchOutcome: match.matchOutcome))
+                    .cornerRadius(10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(backgroundColor(matchOutcome: match.matchOutcome))
+                    )
+                    .padding([.top, .horizontal])
+                    .sheet(isPresented: $modal, content: {
+                        DetailModalView(showModal: $modal, detailUUID: $clikedUUID)
+                    })
+                    
                     
                     
                 }
             }
         }
-    
+        
     }
     func backgroundColor(matchOutcome: matchRecordType) -> Color {
         switch matchOutcome {

@@ -68,22 +68,22 @@ struct SelectTeam: View {
                         let _ = print(qur[0].favoriteTeam.name)
                         self.tag = true
                     }, label: {
-                       
-                            Text("Start")
-                                .frame(width: 300, height: 30)
                         
-                            
-                        })
-                        .buttonStyle(.borderedProminent)
-                        .tint(.blue)
-                        .padding(.bottom, 40)
-                        .navigationDestination(isPresented: $tag) {
-                            CalendarView()
-                        }
-                 
-
+                        Text("Start")
+                            .frame(width: 300, height: 30)
+                        
+                        
+                    })
+                    .buttonStyle(.borderedProminent)
+                    .tint(.blue)
+                    .padding(.bottom, 40)
+                    .navigationDestination(isPresented: $tag) {
+                        CalendarView()
+                    }
                     
-                           
+                    
+                    
+                    
                     
                 }
             }
