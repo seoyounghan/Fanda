@@ -30,6 +30,7 @@
 		BD583B0C2BCCBECB005B4EFB /* image7.png in Resources */ = {isa = PBXBuildFile; fileRef = BD583B022BCCBECB005B4EFB /* image7.png */; };
 		BD583B0D2BCCBECB005B4EFB /* image9.png in Resources */ = {isa = PBXBuildFile; fileRef = BD583B032BCCBECB005B4EFB /* image9.png */; };
 		BD74DBEC2BCD7F0300704806 /* InputModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD74DBEB2BCD7F0300704806 /* InputModalView.swift */; };
+		BD74DBF02BCE08AF00704806 /* SelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD74DBEF2BCE08AF00704806 /* SelectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		BD583B022BCCBECB005B4EFB /* image7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image7.png; path = ../../../images/image7.png; sourceTree = "<group>"; };
 		BD583B032BCCBECB005B4EFB /* image9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = image9.png; path = ../../../images/image9.png; sourceTree = "<group>"; };
 		BD74DBEB2BCD7F0300704806 /* InputModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputModalView.swift; sourceTree = "<group>"; };
+		BD74DBEF2BCE08AF00704806 /* SelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				BD1AEB542BCC1A9C0069A75F /* TopBarView.swift */,
 				BD583AF72BCCB5E5005B4EFB /* DiaryListView.swift */,
 				BD74DBEB2BCD7F0300704806 /* InputModalView.swift */,
+				BD74DBEF2BCE08AF00704806 /* SelectView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			files = (
 				BD1AEB512BCBA0170069A75F /* UserMatchRecord.swift in Sources */,
 				BD1AEB4D2BCAC0B70069A75F /* CustomDatePicker.swift in Sources */,
+				BD74DBF02BCE08AF00704806 /* SelectView.swift in Sources */,
 				BD1AEB532BCBA5760069A75F /* UserData.swift in Sources */,
 				BD1AEB462BCA4B4C0069A75F /* Teams.swift in Sources */,
 				BD1AEB382BCA421A0069A75F /* SelectTeam.swift in Sources */,

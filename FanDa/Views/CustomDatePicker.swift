@@ -48,8 +48,8 @@ struct CustomDatePicker: View {
                             .multilineTextAlignment(.center)
                             .frame(width: 30, height: 30)
                             .padding(.all, 10)
-                            
-                            
+                        
+                        
                     })
                     .foregroundColor(.white)
                     .background(clikedColor(num1: winLoseClicked, num2: 1))
@@ -63,7 +63,7 @@ struct CustomDatePicker: View {
                             .multilineTextAlignment(.center)
                             .frame(width: 30, height: 30)
                             .padding(.all, 10)
-                            
+                        
                     })
                     .foregroundColor(.white)
                     .background(clikedColor(num1: winLoseClicked, num2: 2))
@@ -85,11 +85,11 @@ struct CustomDatePicker: View {
                 })
             }
             .cornerRadius(10)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 15)
-                            .stroke(Color.gray)
-                    )
-                    .padding([.top, .horizontal])
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color.gray)
+            )
+            .padding([.top, .horizontal])
             
             HStack(spacing: 20) {
                 
@@ -100,7 +100,7 @@ struct CustomDatePicker: View {
                     
                     Text("\(extraData()[1])")
                         .font(.title.bold())
-    
+                    
                 }
                 
                 Spacer(minLength: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/)
@@ -126,6 +126,7 @@ struct CustomDatePicker: View {
             }
             .padding(.horizontal)
             
+            
             HStack(spacing: 0) {
                 ForEach(days, id: \.self) {day in
                     Text(day)
@@ -138,25 +139,26 @@ struct CustomDatePicker: View {
             //Dates
             let columns = Array(repeating: GridItem(.flexible()), count: 7)
             
-            LazyVGrid(columns: columns, spacing: 15) {
+            LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(extractDate()) { value in
-//                    Text("\(value.day)")
-//                        .font(.title3)
+                    //                    Text("\(value.day)")
+                    //                        .font(.title3)
                     
                     CardView(value: value)
                         .background(
                             
                             Capsule()
                                 .fill(Color(red: 0, green: 122/255, blue: 255/255, opacity: 0.47))
-                                .padding(.horizontal, 8)
+                                .padding(.horizontal, 5)
                                 .opacity(isSameDay(date1: value.date, date2: currentDate) ? 1: 0)
-                                
+                            
                         )
                         .onTapGesture {
                             currentDate = value.date
                         }
                 }
             }
+            Spacer()
         }
         .onChange(of: currentMonth) { newValue in
             //달 갱신
@@ -181,9 +183,9 @@ struct CustomDatePicker: View {
                         Circle()
                             .fill(.blue)
                             .frame(width: 8, height: 8)
-                            
+                        
                     } else {
-                       Circle()
+                        Circle()
                             .fill(.gray)
                             .frame(width: 8,height: 8)
                     }
@@ -199,8 +201,8 @@ struct CustomDatePicker: View {
                 }
             }
         }
-        .padding(.vertical, 8)
-        .frame(height: 60, alignment: .top)
+        .padding(.vertical, 10)
+        .frame(height: 55, alignment: .top)
     }
     
     func isSameDay(date1: Date, date2: Date) -> Bool {

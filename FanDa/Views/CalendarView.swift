@@ -19,6 +19,8 @@ struct CalendarView: View {
                     CustomDatePicker(currentDate: $currentDate)
                 } else {
                     DiaryListView()
+                    
+                    Spacer()
                 }
             }
         }

@@ -19,19 +19,12 @@ struct FanDaApp: App {
             fatalError("\(error)")
         }
     } ()
-    
-    @Environment(\.modelContext) private var modelContext
-    @State private var userDatas: UserData?
     var body: some Scene {
         WindowGroup {
             
-            if let userDatas {
-                CalendarView()
-            } else {
-                SelectTeam()
-                    .modelContainer(userModelContainer)
-            }
+            SelectView()
         }
+        .modelContainer(userModelContainer)
         
     }
 }
