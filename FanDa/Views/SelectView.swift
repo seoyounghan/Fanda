@@ -35,14 +35,14 @@ struct SelectView: View {
                             
                             .frame(width: 300, height: 50)
                             .foregroundColor(Color.white)
-                            .background(Color.blue)
+                            .background(Color.black)
                             .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
                             
                     })
                     .cornerRadius(10)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 15)
-                                    .stroke(Color.blue)
+                                    .stroke(Color.black)
                             )
                             .padding([.top, .horizontal])
                     .navigationDestination(isPresented: $buttonTapped) {
@@ -54,7 +54,19 @@ struct SelectView: View {
                         buttonTapped = true
                     }, label: {
                         Text("다이어리 작성")
+                            .font(.title)
+                            
+                            .frame(width: 300, height: 50)
+                            .foregroundColor(Color.white)
+                            .background(Color.black)
+                            .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
                     })
+                    .cornerRadius(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 15)
+                                    .stroke(Color.black)
+                            )
+                            .padding([.top, .horizontal])
                     .navigationDestination(isPresented: $buttonTapped) {
                         CalendarView()
                     }

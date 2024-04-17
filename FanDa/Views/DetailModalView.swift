@@ -31,9 +31,13 @@ struct DetailModalView: View {
             
                         
             }
-            Text("\(userMatched[0].detail)")
-                .padding(.all, 10)
-                .frame(height: 100)
+            ScrollView {
+                Text("\(userMatched[0].detail)")
+                    
+                    
+            }
+            .frame(height: 100)
+            .padding(.all, 15)
             Divider()
             
             Text("나만의 POG")
@@ -99,10 +103,9 @@ struct DetailModalView: View {
             }, label: {
                 Text("닫기")
                     .foregroundColor(Color.white)
-                    .frame(height: 30)
+                    .frame(width: 350, height: 65)
                     .fontWeight(.bold)
             })
-            .frame(width: 350, height: 65)
             .multilineTextAlignment(.center)
             .font(.title)
             .foregroundColor(.white)

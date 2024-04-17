@@ -56,9 +56,13 @@ struct InputModalView: View {
             
                         
             }
-            TextField("내용을 입력하세요.", text: $detailWritten)
-                .padding(.all, 10)
-                .frame(height: 100)
+            
+            TextEditor(text: $detailWritten)
+                .padding(.all, 15)
+                .keyboardType(.default)
+                .frame(height: 150)
+                
+                
             Divider()
             
             Text("나만의 POG")
@@ -155,10 +159,9 @@ struct InputModalView: View {
             }, label: {
                 Text("저장")
                     .foregroundColor(Color.white)
-                    .frame(height: 30)
+                    .frame(width: 350, height: 65)
                     .fontWeight(.bold)
             })
-            .frame(width: 350, height: 65)
             .multilineTextAlignment(.center)
             .font(.title)
             .foregroundColor(.white)

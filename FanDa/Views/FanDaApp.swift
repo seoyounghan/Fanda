@@ -12,7 +12,7 @@ import SwiftData
 struct FanDaApp: App {
     var userModelContainer: ModelContainer = {
         let schema = Schema([UserData.self, UserMatchRecord.self])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
