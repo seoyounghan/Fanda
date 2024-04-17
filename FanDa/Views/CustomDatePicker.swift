@@ -9,27 +9,36 @@ import SwiftUI
 import SwiftData
 
 struct CustomDatePicker: View {
-    @Binding var currentDate: Date
-    @State var currentMonth: Int = 0
-    @State private var tag: Bool = false
-    @State private var winLoseClicked: Int = 0
     @Environment(\.modelContext) var modelContext
-    @State var showModal: Bool = false
-    @State var detailModal: Bool = false
-    @State var matchUUID: UUID = UUID()
-    
     @Query private var qur: [UserData]
     @Query private var matchRecord: [UserMatchRecord]
     
-    let days: [String] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    var todayWritten: [UserMatchRecord] {
+        let dateFormatter: DateFormatter = .init()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        return matchRecord.filter({dateFormatter.string(from: $0.matchDate) == dateFormatter.string(from: Date())})
+    }
+    
+    @Binding var currentDate: Date
+    @State var currentMonth: Int = 0
+    @State private var tag: Bool = false
+    @State var winLoseClicked: Int
+    @State var showModal: Bool = false
+    @State var detailModal: Bool = false
+    @State var matchUUID: UUID = UUID()
+    @State var isWritten: Bool = false
+    
+    
+    let days: [String] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] 
     
     var body: some View {
         VStack {
             
             VStack(alignment: .center) {
-                //Image("\(qur[0].favoriteTeam.imageName)")
+                Image("\(qur[0].favoriteTeam.imageName)")
                 // 프리뷰용 사진
-                Image("image3")
+                //Image("image3")
                     .resizable()
                     .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fit/*@END_MENU_TOKEN@*/)
                     .frame(width: 70)
@@ -84,7 +93,11 @@ struct CustomDatePicker: View {
                 .clipShape(RoundedRectangle(cornerSize: CGSize(width: 10, height: 10)))
                 .padding()
                 .sheet(isPresented: self.$showModal, content: {
-                    InputModalView(winLoseClicked: $winLoseClicked, showModal: $showModal)
+                    if todayWritten.count > 0 {
+                        InputModalView(matchTeam: todayWritten[0].matchOpponent.name, detailWritten: todayWritten[0].detail, pogWritten: todayWritten[0].pog, setWritten: todayWritten[0].matchSet, emojiWritten: todayWritten[0].todayEmoji, winLoseClicked: $winLoseClicked, showModal: $showModal)
+                    } else {
+                        InputModalView(matchTeam: "팀을 골라주세요", detailWritten: "", pogWritten: "선수를 선택해주세요", setWritten: "", emojiWritten: "", winLoseClicked: $winLoseClicked, showModal: $showModal)
+                    }
                 })
             }
             .cornerRadius(10)
@@ -221,6 +234,20 @@ struct CustomDatePicker: View {
         .padding(.vertical, 10)
         .frame(height: 55, alignment: .top)
     }
+    
+//    private func isTodayWritten() {
+//        if todayWritten.count > 0 {
+//            if todayWritten[0].matchOutcome == .lose {
+//                self.winLoseClicked = 1
+//            } else if todayWritten[1].matchOutcome == .win {
+//                self.winLoseClicked = 2
+//            } else {
+//                self.winLoseClicked = 0
+//            }
+//        } else {
+//            winLoseClicked = 0
+//        }
+//    }
     
     func isSameDay(date1: Date, date2: Date) -> Bool {
         let calendar = Calendar.current

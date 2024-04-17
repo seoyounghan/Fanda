@@ -14,17 +14,24 @@ struct InputModalView: View {
     let emojis = ["😀", "😊"]
     
     @State private var openMenu: Bool = false
-    @State var matchTeam: String = "상대팀 선택"
-    @State var detailWritten: String = ""
-    @State var pogWritten: String = "선수 선택"
-    @State var setWritten = ""
-    @State var emojiWritten: String = ""
+    @State var matchTeam: String
+    @State var detailWritten: String
+    @State var pogWritten: String
+    @State var setWritten: String
+    @State var emojiWritten: String
     @Binding var winLoseClicked: Int
     
     @Binding var showModal: Bool
     
     @Environment(\.modelContext) private var modelContext
-    //@Query private var 
+    @Query private var matchRecord: [UserMatchRecord]
+    
+    var todayWritten: [UserMatchRecord] {
+        let dateFormatter: DateFormatter = .init()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        return matchRecord.filter({dateFormatter.string(from: $0.matchDate) == dateFormatter.string(from: Date())})
+    }
     
     var body: some View {
         VStack {
@@ -128,6 +135,15 @@ struct InputModalView: View {
             }.id(emojis)
             
             Button(action: {
+                if todayWritten.count > 0 {
+                    do {
+                        modelContext.delete(todayWritten[0])
+                        try modelContext.save()
+                    } catch {
+                        print("error")
+                    }
+                }
+                
                 do {
                     modelContext.insert(UserMatchRecord(matchOutcome: intToMatchRecordType(myInt: winLoseClicked), matchOpponent: findTeam(teamName: matchTeam), pog: pogWritten, matchSet: setWritten, todayEmoji: emojiWritten, detail: detailWritten, matchDate: Date()))
                     try modelContext.save()
