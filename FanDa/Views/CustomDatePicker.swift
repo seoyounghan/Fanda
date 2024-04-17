@@ -15,8 +15,11 @@ struct CustomDatePicker: View {
     @State private var winLoseClicked: Int = 0
     @Environment(\.modelContext) var modelContext
     @State var showModal: Bool = false
+    @State var detailModal: Bool = false
+    @State var matchUUID: UUID = UUID()
     
     @Query private var qur: [UserData]
+    @Query private var matchRecord: [UserMatchRecord]
     
     let days: [String] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     
@@ -172,25 +175,37 @@ struct CustomDatePicker: View {
     func CardView(value: DateValue) -> some View {
         VStack {
             if value.day != -1 {
-                if let match = matches.first(where: { match in
+                if let match = matchRecord.first(where: { match in
                     
                     return isSameDay(date1: match.matchDate, date2: value.date)
                 }){
-                    Text("\(value.day)")
-                        .font(.title3)
-                        .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? .white : .primary)
-                        .frame(maxWidth:.infinity)
-                    Spacer()
-                    if match.matchOutcome == matchRecordType.win {
-                        Circle()
-                            .fill(.blue)
-                            .frame(width: 8, height: 8)
-                        
-                    } else {
-                        Circle()
-                            .fill(.gray)
-                            .frame(width: 8,height: 8)
-                    }
+                    Button(action: {
+                        currentDate = getCurrentMonth()
+                        matchUUID = match.id
+                        detailModal.toggle()
+                    }, label: {
+                        VStack {
+                            Text("\(value.day)")
+                                .font(.title3)
+                                .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? .white : .primary)
+                                .frame(maxWidth:.infinity)
+                            
+                            Spacer()
+                            if match.matchOutcome == matchRecordType.win {
+                                Circle()
+                                    .fill(.blue)
+                                    .frame(width: 8, height: 8)
+                                
+                            } else {
+                                Circle()
+                                    .fill(.gray)
+                                    .frame(width: 8,height: 8)
+                            }
+                        }
+                    })
+                    .sheet(isPresented: $detailModal, content: {
+                        DetailModalView(showModal: $detailModal, detailUUID: $matchUUID)
+                    })
                     
                     
                 } else {
