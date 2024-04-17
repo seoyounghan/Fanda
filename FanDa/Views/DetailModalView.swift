@@ -63,7 +63,7 @@ struct DetailModalView: View {
                 .frame(width: 350, alignment: .leading)
                 .padding(.all, 0)
             
-            Text("\(userMatched[0].matchOutcome)")
+            Text("\(userMatched[0].matchSet)")
                 .frame(width: 350, height: 65)
                 .multilineTextAlignment(.center)
                 .font(.title)

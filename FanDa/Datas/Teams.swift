@@ -28,4 +28,6 @@ var teams: [Team] = [
     Team(name: "KWANGDONG FREECS", imageName: "image9", teamMembers: ["DuDu", "Cuzz", "BuLLDoG", "Bull", "Quantum"])
 ]
 
+var teamNameData = ["Gen.G", "T1", "kt Rolster", "Hanwha Life Esports", "Dplus KIA", "DRX", "FearX", "OKSavingsBank BRION",  "Nongshim RedForce", "KWANGDONG FREECS"]
+
 

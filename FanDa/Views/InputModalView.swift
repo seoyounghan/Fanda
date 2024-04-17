@@ -9,9 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct InputModalView: View {
-    let teamNameData = ["Gen.G", "T1"]
-    let teamMembers = ["Doran", "Peanut", "Zeka", "Viper", "Delight"]
-    let emojis = ["😀", "😊"]
+    let emojis = ["😀", "😊", "🥇", "🙌🏻", "🤬"]
     
     @State private var openMenu: Bool = false
     @State var matchTeam: String
@@ -24,6 +22,7 @@ struct InputModalView: View {
     @Binding var showModal: Bool
     
     @Environment(\.modelContext) private var modelContext
+    @Query private var userData: [UserData]
     @Query private var matchRecord: [UserMatchRecord]
     
     var todayWritten: [UserMatchRecord] {
@@ -42,7 +41,9 @@ struct InputModalView: View {
                 Menu {
                     Picker(selection: $matchTeam) {
                         ForEach(teamNameData, id: \.self) { team in
-                            Text(team)
+                            if team != userData[0].favoriteTeam.name {
+                                Text(team)
+                            }
                             
                         }
                     } label: {}
@@ -67,7 +68,7 @@ struct InputModalView: View {
                 .padding(.all, 0)
             Menu {
                 Picker(selection: $pogWritten) {
-                    ForEach(teamMembers, id: \.self) { team in
+                    ForEach(userData[0].favoriteTeam.teamMembers, id: \.self) { team in
                         Text(team)
                         
                     }
@@ -84,7 +85,7 @@ struct InputModalView: View {
                                     .stroke(Color(red: 217/255, green: 217/255, blue: 217/255, opacity: 1.0))
                             )
                             .padding([ .horizontal])
-            }.id(teamMembers)
+            }.id(userData[0].favoriteTeam.teamMembers)
             
             
             
@@ -201,6 +202,3 @@ struct InputModalView: View {
 }
 
 
-//#Preview {
-//    InputModalView()
-//}

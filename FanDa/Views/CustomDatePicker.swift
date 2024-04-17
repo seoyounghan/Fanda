@@ -41,7 +41,7 @@ struct CustomDatePicker: View {
                 //Image("image3")
                     .resizable()
                     .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fit/*@END_MENU_TOKEN@*/)
-                    .frame(width: 70)
+                    .frame(height: 50)
                     .padding(.all, 10)
                 
                 Divider()
