@@ -24,3 +24,5 @@ Apple Developer Academy 3기 NC1 프로젝트
 
 ## 💡기능
 
+![Fanda Flow](https://github.com/seoyounghan/Fanda/assets/63441374/6c65fb20-81c6-4b51-a378-fadf3faa25c2)
+
