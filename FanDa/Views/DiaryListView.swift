@@ -12,7 +12,8 @@ struct DiaryListView: View {
     @State var modal: Bool = false
     @State var clikedUUID: UUID = UUID()
     
-    @Query private var matchRecords: [UserMatchRecord]
+    @Query(sort: \UserMatchRecord.matchDate, order: .reverse) private var matchRecords: [UserMatchRecord]
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {

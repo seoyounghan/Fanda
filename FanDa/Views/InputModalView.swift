@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct InputModalView: View {
-    let emojis = ["😀", "😊", "🥇", "🙌🏻", "🤬"]
+    let emojis = ["🫶🏻", "😊", "🥇", "🙌🏻", "🤬", "😭", "😬", "🫨"]
     
     @State private var openMenu: Bool = false
     @State var matchTeam: String
